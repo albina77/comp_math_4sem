@@ -1,0 +1,41 @@
+import matplotlib.pyplot as plt
+
+a, b = list(), list()
+a0, b0 = input().split()
+a0, b0 = float(a0), float(b0)
+a.append(a0)
+b.append(b0)
+
+
+def func(a, r, n):
+    if n != 0:
+        x = func(a, r, n-1)
+        if n != 1:
+            a.append(x)
+        return 4 * r * x * (1-x)
+    else:
+        return a[0]
+
+
+def func2(a, r, n):
+    if n != 0:
+        x = func2(a, r, n-1)
+        if n != 1:
+            x = x * 20
+            x = x / 20
+            a.append(x)
+        return 4 * r * x * (1-x)
+    else:
+        return a[0]
+
+r1, r2 = input().split()
+r1, r2 = float(r1), float(r2)
+n = 300
+a.append(func(a, r1, n))
+b.append(func2(b, r2, n))
+plt.title('r = ' + str(r1))
+plt.plot(range(n+1), a, 'r', label='x0 = 0.50')
+plt.plot(range(n+1), b, 'g', label='x0 = 0.51')
+# plt.legend()
+plt.show()
+

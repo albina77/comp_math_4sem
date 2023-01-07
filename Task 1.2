@@ -1,0 +1,26 @@
+import numpy as np
+from sympy import *
+from sympy import Min
+
+
+def func(r, n):
+    if n != 0:
+        x = func(r, n-1)
+        return 4 * r * x * (1-x)
+    else:
+        return x0
+
+
+xn = Symbol('x')
+r = Symbol('r')
+f = 4*r*xn*(1-xn)
+f = f.subs(xn, f)
+solves = solve(Eq(f, xn), r)
+f = f - xn
+print(solves)
+solves2 = [diff(i, xn) for i in solves]
+print(solves2)
+solves2 = [solve(i, xn) for i in solves2]
+print(solves2)
+print([i.subs(xn, solves2[0][0]) for i in solves])
+

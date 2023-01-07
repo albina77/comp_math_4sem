@@ -1,0 +1,42 @@
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from multiprocessing import Process
+
+step = float(input())
+T = int(input())
+A = int(input())
+N = 1000
+p = 0
+
+average_p_ = np.zeros(1)
+average = np.zeros(1)
+p += step
+
+while p < 1:
+    number = np.empty((A))
+    for k in range(A):
+        x = 1
+        population = np.zeros(N)
+        population[0] = 1
+        for j in range(T):
+            for i in range(N):
+                if population[i] == 1:
+                    population[i] = 0
+                else:
+                    rand = np.random.random(1)
+                    if rand < (1 - (1 - p) ** x):
+                        population[i] = 1
+        x = np.sum(population)
+        number[k] = x
+
+    average = np.append(average, np.sum(number) / A)
+    average_p_ = np.append(average_p_, p)
+    p += step
+
+fig, ax = plt.subplots()
+ax.set_xlabel("p")
+ax.set_ylabel("количество заболевших")
+ax.plot(average_p_, average)
+# plt.title('p = {}'.format(p))
+plt.show()

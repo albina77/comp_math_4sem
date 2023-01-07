@@ -1,0 +1,24 @@
+import numpy as np
+from sympy import *
+
+
+n = int(input())
+xn = Symbol('x')
+r = Symbol('r')
+f = 64*r**3*xn**2 - 64*r**3*xn - 256*r**2*xn + 160*r**3 + 176*r**2 + 1024*r - 4095
+#for i in range(2**n):
+#    f = f.subs(xn, f)
+solves = solve(Eq(f, 0), xn)
+print(len(solves))
+print(solves[0])
+print(solves[1])
+solves2 = [diff(i, xn) for i in solves]
+print(solves2)
+solves2 = [solve(i, xn) for i in solves2]
+print(solves2)
+answer = []
+for j in range(len(solves2)):
+    for i in solves2[j]:
+        for k in solves:
+            answer.append(k.subs(xn, i))
+print(answer)

@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt
+import math
+
+
+x0 = float(input())
+n = int(input())
+
+
+def func(r, n):
+    if n != 0:
+        x = func(r, n-1)
+        return x * math.exp(r * (1 - x))
+    else:
+        return x0
+
+
+r = 2.4
+rx = list()
+while r <= 3:
+    rx.append(r)
+    r += 0.001
+x = [[] for i in range(100)]
+for i in range(100):
+    r = 2.4
+    while r <= 3:
+        x[i].append(func(r, n))
+        r += 0.001
+    n -= 1
+    plt.plot(rx, x[i], 'ko', markersize=0.2)
+
+plt.show()
+
